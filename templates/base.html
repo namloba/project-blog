@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog System</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<nav>
+    <a href="/">🏠 Trang chủ</a>
+    {% if session.get("user") %}
+        <a href="/create">✍️ Đăng bài</a>
+        {% if session.get("role") == "admin" %}
+        <a href="/admin" class="admin-link">⚙️ Quản trị</a>
+        {% endif %}
+        <span class="user-info">
+            Xin chào, <strong>{{ session.get("user") }}</strong>
+            {% if session.get("role") == "admin" %}
+            <span class="admin-badge-nav">⭐</span>
+            {% endif %}
+        </span>
+        <a href="/logout">🚪 Đăng xuất</a>
+    {% else %}
+        <a href="/login">🔐 Đăng nhập</a>
+        <a href="/register">📝 Đăng ký</a>
+    {% endif %}
+</nav>
+<div class="container">{% block content %}{% endblock %}</div>
+</body>
+</html>

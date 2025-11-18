@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>✏️ Chỉnh Sửa Bài Viết</h2>
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        <input name="title" value="{{ post.title }}" placeholder="📌 Tiêu đề bài viết" required>
+        <textarea name="content" placeholder="✨ Nội dung bài viết..." required>{{ post.content }}</textarea>
+        
+        {% if post.image_path %}
+        <div class="current-image">
+            <p>Ảnh hiện tại:</p>
+            <img src="/static/{{ post.image_path }}" alt="Current image" style="max-width: 300px; border-radius: 8px;">
+        </div>
+        {% endif %}
+        
+        <div class="file-upload-wrapper">
+            <label for="image" class="file-upload-label">
+                🖼️ Thay đổi ảnh (tùy chọn)
+            </label>
+            <input type="file" name="image" id="image" accept="image/*" class="file-upload-input" onchange="previewImage(event)">
+            <div id="imagePreview" class="image-preview"></div>
+        </div>
+        
+        <button type="submit">💾 Lưu thay đổi</button>
+    </form>
+</div>
+
+<script>
+function previewImage(event) {
+    const preview = document.getElementById('imagePreview');
+    const file = event.target.files[0];
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+        }
+        reader.readAsDataURL(file);
+    } else {
+        preview.innerHTML = '';
+    }
+}
+</script>
+{% endblock %}

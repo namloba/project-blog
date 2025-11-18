@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="post-detail-container">
+    <div class="post-card">
+        <div class="post-header">
+            <h2>{{ post.title }}</h2>
+            <div class="post-author">
+                <span class="author-name">👤 {{ post.username }}</span>
+                {% if post.role == 'admin' %}
+                <span class="admin-badge">⭐ Admin</span>
+                {% endif %}
+            </div>
+        </div>
+        
+        {% if post.image_path %}
+        <div class="post-image-detail">
+            <img src="/static/{{ post.image_path }}" alt="{{ post.title }}">
+        </div>
+        {% endif %}
+        
+        <div class="post-content-detail">
+            {{ post.content }}
+        </div>
+        
+        <div class="post-meta">
+            <span>📅 {{ post.created_at }}</span>
+        </div>
+        
+        {% if session.get("user_id") %}
+            {% if session.get("user_id") == post.author_id or session.get("role") == "admin" %}
+            <div class="post-actions">
+                <a href="/edit/{{ post.id }}">✏️ Chỉnh sửa</a>
+                <a href="/delete/{{ post.id }}" onclick="return confirm('Bạn có chắc muốn xóa bài viết này?')">🗑️ Xóa</a>
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <h3>💬 Bình luận ({{ comments|length }})</h3>
+        
+        {% if session.get("user_id") %}
+        <div class="comment-form">
+            <form method="POST" action="/post/{{ post.id }}/comment">
+                <textarea name="content" placeholder="✍️ Viết bình luận của bạn..." required></textarea>
+                <button type="submit">Gửi bình luận</button>
+            </form>
+        </div>
+        {% else %}
+        <p class="login-prompt">
+            <a href="/login">Đăng nhập</a> để bình luận
+        </p>
+        {% endif %}
+        
+        <div class="comments-list">
+            {% if comments %}
+                {% for comment in comments %}
+                <div class="comment-card">
+                    <div class="comment-header">
+                        <span class="comment-author">
+                            👤 {{ comment.username }}
+                            {% if comment.role == 'admin' %}
+                            <span class="admin-badge-small">⭐</span>
+                            {% endif %}
+                        </span>
+                        <span class="comment-time">{{ comment.created_at }}</span>
+                    </div>
+                    <div class="comment-content">
+                        {{ comment.content }}
+                    </div>
+                    {% if session.get("user_id") %}
+                        {% if session.get("user_id") == comment.user_id or session.get("role") == "admin" %}
+                        <div class="comment-actions">
+                            <a href="/comment/{{ comment.id }}/delete" onclick="return confirm('Xóa bình luận này?')">🗑️ Xóa</a>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-comments">Chưa có bình luận nào. Hãy là người đầu tiên bình luận!</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="back-link">
+        <a href="/">← Quay lại trang chủ</a>
+    </div>
+</div>
+{% endblock %}

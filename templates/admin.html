@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>⚙️ Quản Trị Hệ Thống</h2>
+
+<div class="admin-container">
+    <!-- Users Management -->
+    <div class="admin-section">
+        <h3>👥 Quản lý người dùng ({{ users|length }})</h3>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Vai trò</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>
+                            <span class="role-badge {% if user.role == 'admin' %}role-admin{% else %}role-user{% endif %}">
+                                {{ user.role }}
+                            </span>
+                        </td>
+                        <td>{{ user.created_at }}</td>
+                        <td class="action-buttons">
+                            <a href="/admin/user/{{ user.id }}/toggle_role" class="btn-toggle">
+                                {% if user.role == 'admin' %}⬇️ Hạ user{% else %}⬆️ Lên admin{% endif %}
+                            </a>
+                            {% if user.id != session.get('user_id') %}
+                            <a href="/admin/user/{{ user.id }}/delete" class="btn-delete" onclick="return confirm('Xóa user này?')">🗑️ Xóa</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Posts Management -->
+    <div class="admin-section">
+        <h3>📝 Quản lý bài viết ({{ posts|length }})</h3>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tiêu đề</th>
+                        <th>Tác giả</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.title[:50] }}{% if post.title|length > 50 %}...{% endif %}</td>
+                        <td>{{ post.username }}</td>
+                        <td>{{ post.created_at }}</td>
+                        <td class="action-buttons">
+                            <a href="/post/{{ post.id }}" class="btn-view">👁️ Xem</a>
+                            <a href="/edit/{{ post.id }}" class="btn-edit">✏️ Sửa</a>
+                            <a href="/delete/{{ post.id }}" class="btn-delete" onclick="return confirm('Xóa bài viết này?')">🗑️ Xóa</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Comments Management -->
+    <div class="admin-section">
+        <h3>💬 Quản lý bình luận ({{ comments|length }})</h3>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Người dùng</th>
+                        <th>Bài viết</th>
+                        <th>Nội dung</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.username }}</td>
+                        <td>{{ comment.post_title[:30] }}...</td>
+                        <td>{{ comment.content[:50] }}{% if comment.content|length > 50 %}...{% endif %}</td>
+                        <td>{{ comment.created_at }}</td>
+                        <td class="action-buttons">
+                            <a href="/comment/{{ comment.id }}/delete" class="btn-delete" onclick="return confirm('Xóa bình luận này?')">🗑️ Xóa</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="back-link">
+    <a href="/">← Quay lại trang chủ</a>
+</div>
+{% endblock %}

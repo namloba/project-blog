@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>📝 Bài Viết Blog</h2>
+{% if posts %}
+    {% for post in posts %}
+    <div class="post-card">
+        <div class="post-header">
+            <h3>{{ post.title }}</h3>
+            <div class="post-author">
+                <span class="author-name">👤 {{ post.username }}</span>
+                {% if post.role == 'admin' %}
+                <span class="admin-badge">⭐ Admin</span>
+                {% endif %}
+            </div>
+        </div>
+        
+        {% if post.image_path %}
+        <div class="post-image">
+            <img src="/static/{{ post.image_path }}" alt="{{ post.title }}">
+        </div>
+        {% endif %}
+        
+        <p class="post-content">{{ post.content }}</p>
+        
+        <div class="post-footer">
+            <div class="post-meta">
+                <span>📅 {{ post.created_at }}</span>
+                <span>💬 {{ post.comment_count }} bình luận</span>
+            </div>
+            <div class="post-actions">
+                <a href="/post/{{ post.id }}" class="btn-view">👁️ Xem chi tiết</a>
+                {% if session.get("user_id") %}
+                    {% if session.get("user_id") == post.author_id or session.get("role") == "admin" %}
+                    <a href="/edit/{{ post.id }}">✏️ Sửa</a>
+                    <a href="/delete/{{ post.id }}" onclick="return confirm('Bạn có chắc muốn xóa bài viết này?')">🗑️ Xóa</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="empty-state">
+        <p>📭 Chưa có bài viết nào. Hãy tạo bài viết đầu tiên của bạn!</p>
+    </div>
+{% endif %}
+{% endblock %}

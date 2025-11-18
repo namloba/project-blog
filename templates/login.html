@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>🔐 Đăng Nhập</h2>
+<div class="form-container">
+    <form method="POST">
+        <input name="username" placeholder="👤 Tên đăng nhập" required>
+        <input name="password" type="password" placeholder="🔒 Mật khẩu" required>
+        <button type="submit">Đăng nhập</button>
+    </form>
+</div>
+{% endblock %}

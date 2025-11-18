@@ -1,0 +1,695 @@
+/* Reset và Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation Bar */
+nav {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1.2rem 2rem;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav a {
+    text-decoration: none;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+/* Headings */
+h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+}
+
+h3 {
+    color: #667eea;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Post Cards */
+.post-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.post-content {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.post-meta {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.post-actions a {
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.post-actions a:first-child {
+    background: #4CAF50;
+    color: white;
+}
+
+.post-actions a:first-child:hover {
+    background: #45a049;
+    transform: scale(1.05);
+}
+
+.post-actions a:last-child {
+    background: #f44336;
+    color: white;
+}
+
+.post-actions a:last-child:hover {
+    background: #da190b;
+    transform: scale(1.05);
+}
+
+/* Forms */
+.form-container {
+    background: white;
+    border-radius: 15px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #f9f9f9;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+textarea {
+    min-height: 200px;
+    resize: vertical;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #999;
+}
+
+/* Buttons */
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Divider */
+hr {
+    display: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: white;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+        margin: 2rem auto;
+    }
+    
+    nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    nav a {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+    }
+    
+    .post-card, .form-container {
+        padding: 1.5rem;
+    }
+    
+    .post-actions {
+        flex-direction: column;
+    }
+    
+    .post-actions a {
+        text-align: center;
+    }
+    
+    .admin-table-container {
+        overflow-x: auto;
+    }
+}
+
+/* ========== NEW FEATURES STYLES ========== */
+
+/* Post Header & Author Info */
+.post-header {
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 1rem;
+}
+
+.post-author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.author-name {
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.admin-badge, .admin-badge-small {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3);
+}
+
+.admin-badge-small {
+    padding: 0.1rem 0.4rem;
+    font-size: 0.7rem;
+}
+
+.admin-badge-nav {
+    font-size: 1rem;
+}
+
+/* User Info in Nav */
+.user-info {
+    color: #667eea;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 20px;
+}
+
+.admin-link {
+    background: linear-gradient(135deg, #FFD700, #FFA500) !important;
+    color: white !important;
+}
+
+.admin-link:hover {
+    background: linear-gradient(135deg, #FFA500, #FF8C00) !important;
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Post Image */
+.post-image {
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.post-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.post-image:hover img {
+    transform: scale(1.02);
+}
+
+.post-image-detail {
+    margin: 2rem 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.post-image-detail img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Post Footer */
+.post-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid #f0f0f0;
+}
+
+.btn-view {
+    background: #2196F3 !important;
+    color: white !important;
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-view:hover {
+    background: #1976D2 !important;
+    transform: scale(1.05);
+}
+
+/* File Upload Styles */
+.file-upload-wrapper {
+    margin: 1.5rem 0;
+}
+
+.file-upload-label {
+    display: block;
+    padding: 1rem;
+    background: #f0f0f0;
+    border: 2px dashed #667eea;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.file-upload-label:hover {
+    background: #e8eaf6;
+    border-color: #764ba2;
+}
+
+.file-upload-input {
+    display: none;
+}
+
+.image-preview {
+    margin-top: 1rem;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.current-image {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+.current-image p {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #666;
+}
+
+/* Comments Section */
+.comments-section {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.comments-section h3 {
+    color: #667eea;
+    margin-bottom: 1.5rem;
+}
+
+.comment-form {
+    margin-bottom: 2rem;
+}
+
+.comment-form textarea {
+    min-height: 120px;
+    margin-bottom: 1rem;
+}
+
+.comment-card {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #667eea;
+    transition: all 0.3s ease;
+}
+
+.comment-card:hover {
+    background: #f0f0f0;
+    transform: translateX(5px);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #667eea;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comment-time {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.comment-content {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.comment-actions {
+    margin-top: 0.8rem;
+}
+
+.comment-actions a {
+    color: #f44336;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.comment-actions a:hover {
+    background: #f44336;
+    color: white;
+}
+
+.no-comments {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.login-prompt {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.login-prompt a {
+    color: #667eea;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+/* Post Detail Container */
+.post-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.post-content-detail {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin: 1.5rem 0;
+}
+
+/* Back Link */
+.back-link {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.back-link a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.back-link a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Admin Panel Styles */
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-section {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.admin-section h3 {
+    color: #667eea;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #f0f0f0;
+}
+
+.admin-table-container {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.admin-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.admin-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.admin-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.role-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.role-admin {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: white;
+}
+
+.role-user {
+    background: #e0e0e0;
+    color: #666;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.action-buttons a {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-toggle {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-toggle:hover {
+    background: #1976D2;
+    transform: scale(1.05);
+}
+
+.btn-edit {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #45a049;
+    transform: scale(1.05);
+}
+
+.btn-delete {
+    background: #f44336;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #da190b;
+    transform: scale(1.05);
+}
