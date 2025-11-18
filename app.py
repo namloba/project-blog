@@ -233,6 +233,10 @@ def logout():
     session.clear()
     return redirect("/")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 # Post detail with comments
 @app.route("/post/<int:id>")
 def post_detail(id):
